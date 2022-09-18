@@ -21,5 +21,18 @@ namespace ChuckSWAPI.Services.Implementations
 
             return people;
         }
+
+        public async Task<People> SearchSwapiPeople(string searchTerm)
+        {
+            var searchUrl = baseAddress + "?search=" + searchTerm;
+            HttpResponseMessage response = await _httpClient.GetAsync(searchUrl);
+            response.EnsureSuccessStatusCode();
+            string content = await response.Content.ReadAsStringAsync();
+
+            People people = JsonConvert.DeserializeObject<People>(content);
+
+
+            return people;
+        }
     }
 }

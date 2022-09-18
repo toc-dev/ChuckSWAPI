@@ -6,5 +6,6 @@ namespace ChuckSWAPI.Services.Interfaces
     public interface ISwapi
     {
         Task<People> GetSwapiPeople();
+        Task<People> SearchSwapiPeople(string searchTerm);
     }
 }
