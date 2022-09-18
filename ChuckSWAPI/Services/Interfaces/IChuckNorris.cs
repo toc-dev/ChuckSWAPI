@@ -7,5 +7,6 @@ namespace ChuckSWAPI.Services.Interfaces
     {
         Task<JokeCategories> GetJokeCategories();
         Task<RandomJoke> GetRandomJoke();
+        Task<JokeSearchResult> SearchJoke(string searchTerm);
     }
 }

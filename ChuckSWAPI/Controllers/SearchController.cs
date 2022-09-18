@@ -22,5 +22,12 @@ namespace ChuckSWAPI.Controllers
             var searchPeople = await _swapi.SearchSwapiPeople(searchTerm);
             return Ok(searchPeople);
         }
+        
+        [HttpGet("SearchChuck")]
+        public async Task<IActionResult> SearchSWA(string searchTerm)
+        {
+            var searchPeople = await _chuckNorris.SearchJoke(searchTerm);
+            return Ok(searchPeople);
+        }
     }
 }

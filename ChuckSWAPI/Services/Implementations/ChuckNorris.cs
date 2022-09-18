@@ -9,21 +9,22 @@ namespace ChuckSWAPI.Services.Implementations
     public class ChuckNorris : IChuckNorris
     {
         //private const string baseUrl;
-        private const string baseAddress = "https://api.chucknorris.io/jokes/categories";
-        private const string randomJokeAddress = "https://api.chucknorris.io/jokes/random";
+        private const string baseUrl = "https://api.chucknorris.io/jokes/";
+        //private const string randomJokeAddress = "https://api.chucknorris.io/jokes/random";
 
 
         private static readonly HttpClient _httpClient = new HttpClient();
 
         public async Task<JokeCategories> GetJokeCategories()
         {
-            
-            HttpResponseMessage response = await _httpClient.GetAsync(baseAddress);
+            var url = baseUrl + "categories";
+
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             string content = await response.Content.ReadAsStringAsync();
-            
+
             var contents = JsonConvert.DeserializeObject(content).ToString();
-            
+
             List<string> jokesCategories = JsonConvert.DeserializeObject<List<string>>(contents);
 
             JokeCategories jokeCategories = new JokeCategories()
@@ -35,7 +36,8 @@ namespace ChuckSWAPI.Services.Implementations
 
         public async Task<RandomJoke> GetRandomJoke()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync(randomJokeAddress);
+            var randomJokeUrl = baseUrl + "random";
+            HttpResponseMessage response = await _httpClient.GetAsync(randomJokeUrl);
             response.EnsureSuccessStatusCode();
             string content = await response.Content.ReadAsStringAsync();
 
@@ -43,8 +45,22 @@ namespace ChuckSWAPI.Services.Implementations
 
             RandomJoke randomJoke = JsonConvert.DeserializeObject<RandomJoke>(contents);
 
-           
+
             return randomJoke;
+        }
+
+        public async Task<JokeSearchResult> SearchJoke(string searchTerm)
+        {
+            var searchUrl = baseUrl + "search?query=" + searchTerm;
+
+            HttpResponseMessage response = await _httpClient.GetAsync(searchUrl);
+            response.EnsureSuccessStatusCode();
+            string content = await response.Content.ReadAsStringAsync();
+
+            JokeSearchResult searchResults = JsonConvert.DeserializeObject<JokeSearchResult>(content);
+
+
+            return searchResults;
         }
     }
 }
