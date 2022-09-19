@@ -6,15 +6,13 @@ using Newtonsoft.Json;
 
 namespace ChuckSWWeb.Services.Implementations
 {
-    public class ChuckService : BaseService, IChuckService
+    public class ChuckService : IChuckService
     {
-        private readonly IHttpClientFactory _clientFactory;
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        private string _chuckUrl;
-        public ChuckService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        private readonly string _chuckUrl;
+        public ChuckService(IConfiguration configuration)
         {
-            _clientFactory = clientFactory;
             _chuckUrl = configuration.GetValue<string>("ServiceUrls:ChuckSWAPI");
         }
 
@@ -50,26 +48,6 @@ namespace ChuckSWWeb.Services.Implementations
 
 
             return joke;
-        }
-
-
-        public Task<T> GetAllAsync<T>()
-        {
-            return SendAsync<T>(new ApiRequest()
-            {
-                ApiType = StaticDetails.ApiType.GET,
-                Url = _chuckUrl + "/chuck/categories"
-            });
-
-        }
-
-        public Task<T> GetAsync<T>(int id)
-        {
-            return SendAsync<T>(new ApiRequest()
-            {
-                ApiType = StaticDetails.ApiType.GET,
-                Url = _chuckUrl + "/api/chuck" + id
-            }); ;
         }
     }
 }

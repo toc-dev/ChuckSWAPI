@@ -1,4 +1,5 @@
 ﻿using ChuckSWAPI.Models.ChuckNorris;
+using ChuckSWShared.Dtos;
 using ChuckSWShared.Dtos.ChuckNorrisDtos;
 using ChuckSWShared.Dtos.StarWarsDto;
 using ChuckSWWeb.Services.Interfaces;
@@ -16,27 +17,30 @@ namespace ChuckSWWeb.Services.Implementations
             _clientFactory = clientFactory;
             _chuckSWApiUrl = configuration.GetValue<string>("ServiceUrls:ChuckSWAPI");
         }
-        public async Task<object> GetSearchResult(string searchTerm)
+        public async Task<SearchResultsDto> GetSearchResult(string searchTerm)
         {
-            JokeSearchResultDto jokeSearch = await GetJokeSearchResults();
-            PeopleDto peopleSearch = await GetPeopleResults();
+            SearchResultsDto searchResult = new();
+            JokeSearchResultDto jokeSearch = await GetJokeSearchResults(searchTerm);
+            PeopleDto peopleSearch = await GetPeopleResults(searchTerm);
 
             if (jokeSearch.Total != 0)
             {
-                return jokeSearch;
+                searchResult.Total = jokeSearch.Total;
+                searchResult.Results = jokeSearch.Results.Select(s => new SearchResults() { Categories = s.Categories, Url = s.Url, Value = s.Value, SearchType = "Chuck Norris Jokes" }).ToArray();
             }
             if(peopleSearch.Count != 0)
             {
-                return peopleSearch;
+                searchResult.Total = peopleSearch.Count;
+                searchResult.Results = peopleSearch.Results.Select(s => new SearchResults() { Url = s.Url, Value = s.Name, SearchType = "Star Wars People" }).ToArray();
             }
-            return(jokeSearch, peopleSearch);
+            return searchResult;
 
         }
 
-        private async Task<JokeSearchResultDto> GetJokeSearchResults()
+        private async Task<JokeSearchResultDto> GetJokeSearchResults(string searchTerm)
         {
             JokeSearchResultDto jokeSearchResult = new();
-            var chuckUrl = _chuckSWApiUrl + "/search/SearchChuck";
+            var chuckUrl = _chuckSWApiUrl + $"/search/SearchChuck/{searchTerm}";
             var response = _httpClient.GetAsync(chuckUrl);
 
             var result = response.Result;
@@ -48,10 +52,10 @@ namespace ChuckSWWeb.Services.Implementations
             return jokeSearchResult;
         }
         
-        private async Task<PeopleDto> GetPeopleResults()
+        private async Task<PeopleDto> GetPeopleResults(string searchTerm)
         {
             PeopleDto peopleSearchResult = new();
-            var swapiUrl = _chuckSWApiUrl + "/search/SearchSWApi";
+            var swapiUrl = _chuckSWApiUrl + $"/search/SearchSWApi/{searchTerm}";
             var response = _httpClient.GetAsync(swapiUrl);
 
             var result = response.Result;

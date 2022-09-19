@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ChuckSWShared.Dtos;
 using ChuckSWWeb.Models;
 using ChuckSWWeb.Models.ChuckNorris;
 using ChuckSWWeb.Services.Interfaces;
@@ -12,15 +13,13 @@ namespace ChuckSWWeb.Controllers
         private readonly IChuckService _chuckService;
         private readonly IStarWarsService _starWarsService;
         private readonly ISearchService _searchService;
-        private readonly IMapper _mapper;
 
-        public ChuckSWController(IChuckService chuckService, IMapper mapper, IStarWarsService starWarsService, ISearchService searchService)
+        public ChuckSWController(IChuckService chuckService, IStarWarsService starWarsService, ISearchService searchService)
         {
             _chuckService = chuckService;
             _starWarsService = starWarsService;
             _searchService = searchService;
 
-            _mapper = mapper;
         }
         public async Task<IActionResult> GetJokeCategories()
         {
@@ -29,16 +28,13 @@ namespace ChuckSWWeb.Controllers
             {
                 return View(response);
             }
-            return View("[]");
+            return View();
         }
 
         public async Task<IActionResult> DisplayRandomJoke()
         {
-            var response = await _chuckService.GetRandomJoke(); 
-            {
-                return View(response); 
-            }
-            return View("[]");
+            var response = await _chuckService.GetRandomJoke();
+            return Ok(response);
         }
 
 
@@ -49,13 +45,25 @@ namespace ChuckSWWeb.Controllers
             {
                 return View(response);
             }
-            return View("[]");
+            return View();
         }
-
-        public async Task<IActionResult> SearchChuckNorrisAndStarWars(string searchTerm)
+        [HttpGet]
+        public async Task<IActionResult> SearchChuckNorrisAndStarWars()
         {
-            var search = _searchService.GetSearchResult(searchTerm);
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> SearchChuckNorrisAndSW(string searchTerm)
+        {
+            var search = await _searchService.GetSearchResult(searchTerm);
             return View(search);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> SearchChuckNorrisAndSW()
+        {
+            return View();
         }
     }
 }

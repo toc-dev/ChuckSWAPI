@@ -34,7 +34,7 @@
 					<td>
 
 
-                                <button type="button" class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
+                                <button  asp-for="" type="button" class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
                                     <img src=""> Get Random Joke
                                 </button>
 
@@ -55,7 +55,7 @@
                                                                 <div class="row g-2">
                                                                     <div class="col-sm-12">
                                                                         <label for="exampleFormControlTextarea1" class="form-label">Joke</label>
-                                                                        <textarea class="form-control textarea" id="stDesc" rows="5"></textarea>
+                                                                        <textarea class="form-control textarea" id="stDesc" rows="5" readonly></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -106,12 +106,12 @@
 	function getRandomJoke(){
         debugger;
         $.ajax({
-                url: "/DisplayRandomJoke",
+                url: "/chucksw/DisplayRandomJoke",
                 type: "GET",
-                dataType: "json",
                 success: function(response){
-                    $('#stDesc').val(response.data.value)
-                    
+                    $('#stDesc').val(response.value)
+                    console.log(response.value)
+
                 }
                 
         });    

@@ -16,14 +16,14 @@ namespace ChuckSWAPI.Controllers
             _swapi = swapi;
         }
 
-        [HttpGet("SearchSWApi")]
+        [HttpGet("SearchSWApi/{searchTerm}")]
         public async Task<IActionResult> SearchChuckSWApi(string searchTerm)
         {
             var searchPeople = await _swapi.SearchSwapiPeople(searchTerm);
             return Ok(searchPeople);
         }
         
-        [HttpGet("SearchChuck")]
+        [HttpGet("SearchChuck/{searchTerm}")]
         public async Task<IActionResult> SearchSWA(string searchTerm)
         {
             var searchPeople = await _chuckNorris.SearchJoke(searchTerm);

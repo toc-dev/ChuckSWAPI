@@ -15,9 +15,14 @@ namespace ChuckSWAPI.Controllers
             _swapi = swapi;
         }
         [HttpGet("people")]
-        public async Task<ActionResult<People>> GetPeople()
+        public async Task<ActionResult<People>> GetPeople(int pageNumber=1)
         {
-            var people = await _swapi.GetSwapiPeople();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var people = await _swapi.GetSwapiPeople(pageNumber);
+
             return Ok(people);
         }
     }

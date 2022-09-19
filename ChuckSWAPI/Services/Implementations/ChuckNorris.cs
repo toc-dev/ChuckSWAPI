@@ -10,13 +10,15 @@ namespace ChuckSWAPI.Services.Implementations
 {
     public class ChuckNorris : IChuckNorris
     {
-        //private const string baseUrl;
-        private const string baseUrl = "https://api.chucknorris.io/jokes/";
-        private readonly IMapper _mapper;
-        //private const string randomJokeAddress = "https://api.chucknorris.io/jokes/random";
+        private readonly string baseUrl;
 
 
         private static readonly HttpClient _httpClient = new HttpClient();
+
+        public ChuckNorris(IConfiguration configuration)
+        {
+            baseUrl = configuration.GetValue<string>("ChuckNorrisConfig:BaseUrl");
+        }
 
         public async Task<JokeCategories> GetJokeCategories()
         {
