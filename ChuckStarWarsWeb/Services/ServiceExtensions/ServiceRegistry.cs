@@ -10,7 +10,7 @@ namespace ChuckSWWeb.Services.ServiceExtensions
             services.AddHttpClient<IChuckService, ChuckService>();
             services.AddScoped<IChuckService, ChuckService>();
             services.AddScoped<IStarWarsService, StarWarsService>();
-            //services.AddScoped<ISwapi, Swapi>();
+            services.AddScoped<ISearchService, SearchService>();
 
             return services;
         }

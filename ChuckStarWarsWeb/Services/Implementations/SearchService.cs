@@ -21,16 +21,16 @@ namespace ChuckSWWeb.Services.Implementations
             JokeSearchResultDto jokeSearch = await GetJokeSearchResults();
             PeopleDto peopleSearch = await GetPeopleResults();
 
-            if (jokeSearch != null)
+            if (jokeSearch.Total != 0)
             {
                 return jokeSearch;
             }
-            if(peopleSearch != null)
+            if(peopleSearch.Count != 0)
             {
                 return peopleSearch;
             }
+            return(jokeSearch, peopleSearch);
 
-             return (jokeSearch, peopleSearch);
         }
 
         private async Task<JokeSearchResultDto> GetJokeSearchResults()
@@ -44,10 +44,6 @@ namespace ChuckSWWeb.Services.Implementations
             {
                 var read = result.Content.ReadAsAsync<JokeSearchResultDto>();
                 jokeSearchResult = read.Result;
-            }
-            if (jokeSearchResult.Total == 0)
-            {
-                return null;
             }
             return jokeSearchResult;
         }
@@ -63,10 +59,6 @@ namespace ChuckSWWeb.Services.Implementations
             {
                 var read = result.Content.ReadAsAsync<PeopleDto>();
                 peopleSearchResult = read.Result;
-            }
-            if (peopleSearchResult.Count == 0)
-            {
-                return null;
             }
             return peopleSearchResult;
         }

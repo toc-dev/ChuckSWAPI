@@ -11,12 +11,15 @@ namespace ChuckSWWeb.Controllers
     {
         private readonly IChuckService _chuckService;
         private readonly IStarWarsService _starWarsService;
+        private readonly ISearchService _searchService;
         private readonly IMapper _mapper;
 
-        public ChuckSWController(IChuckService chuckService, IMapper mapper, IStarWarsService starWarsService)
+        public ChuckSWController(IChuckService chuckService, IMapper mapper, IStarWarsService starWarsService, ISearchService searchService)
         {
             _chuckService = chuckService;
             _starWarsService = starWarsService;
+            _searchService = searchService;
+
             _mapper = mapper;
         }
         public async Task<IActionResult> GetJokeCategories()
@@ -49,11 +52,10 @@ namespace ChuckSWWeb.Controllers
             return View("[]");
         }
 
-        public async Task<IActionResult> SearchChuckNorrisAndStarWars()
+        public async Task<IActionResult> SearchChuckNorrisAndStarWars(string searchTerm)
         {
-            return View("well");
+            var search = _searchService.GetSearchResult(searchTerm);
+            return View(search);
         }
-
-
     }
 }
