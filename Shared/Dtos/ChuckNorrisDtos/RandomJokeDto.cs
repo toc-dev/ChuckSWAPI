@@ -8,9 +8,7 @@ namespace ChuckSWShared.Dtos.ChuckNorrisDtos
 {
     public class RandomJokeDto
     {
-        public class RandomJoke
-        {
-            public object[] categories { get; set; }
-            public string Value { get; set; }
-        }
+        public object[] categories { get; set; }
+        public string Value { get; set; }
+     }
 }

@@ -21,20 +21,19 @@ namespace ChuckSWWeb.Controllers
         }
         public async Task<IActionResult> GetJokeCategories()
         {
-            var response = await _chuckService.GetAll(); // <ApiResponse>(); //GetAllAsync<ApiResponse>();
+            var response = await _chuckService.GetAll();
             if (response != null)
             {
-                return View(response); //jokeCategories = JsonConvert.DeserializeObject<JokeCategories>(Convert.ToString(response));
+                return View(response);
             }
             return View("[]");
         }
 
         public async Task<IActionResult> DisplayRandomJoke()
         {
-            var response = await _chuckService.GetRandomJoke(); // <ApiResponse>(); //GetAllAsync<ApiResponse>();
-            if (response != null)
+            var response = await _chuckService.GetRandomJoke(); 
             {
-                return View(response); //jokeCategories = JsonConvert.DeserializeObject<JokeCategories>(Convert.ToString(response));
+                return View(response); 
             }
             return View("[]");
         }
@@ -48,6 +47,11 @@ namespace ChuckSWWeb.Controllers
                 return View(response);
             }
             return View("[]");
+        }
+
+        public async Task<IActionResult> SearchChuckNorrisAndStarWars()
+        {
+            return View("well");
         }
 
 

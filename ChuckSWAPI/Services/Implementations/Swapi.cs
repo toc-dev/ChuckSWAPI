@@ -1,6 +1,7 @@
 ﻿using ChuckSWAPI.Models;
 using ChuckSWAPI.Models.StarWars;
 using ChuckSWAPI.Services.Interfaces;
+using ChuckSWShared.Dtos.StarWarsDto;
 using Newtonsoft.Json;
 
 namespace ChuckSWAPI.Services.Implementations
@@ -31,7 +32,11 @@ namespace ChuckSWAPI.Services.Implementations
 
             People people = JsonConvert.DeserializeObject<People>(content);
 
-
+            PeopleDto peopleDto = new()
+            {
+                Count = people.Count,
+                Results = people.Results.Select(p => new PeopleResult() { Name = p.Name, Url = p.Url }).ToArray()
+            };
             return people;
         }
     }

@@ -16,7 +16,7 @@ namespace ChuckSWAPI.Controllers
             _swapi = swapi;
         }
 
-        [HttpGet("SearchChuckSWApi")]
+        [HttpGet("SearchSWApi")]
         public async Task<IActionResult> SearchChuckSWApi(string searchTerm)
         {
             var searchPeople = await _swapi.SearchSwapiPeople(searchTerm);

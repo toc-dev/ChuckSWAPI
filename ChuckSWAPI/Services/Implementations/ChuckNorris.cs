@@ -1,6 +1,8 @@
-﻿using ChuckSWAPI.Models;
+﻿using AutoMapper;
+using ChuckSWAPI.Models;
 using ChuckSWAPI.Models.ChuckNorris;
 using ChuckSWAPI.Services.Interfaces;
+using ChuckSWShared.Dtos.ChuckNorrisDtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,6 +12,7 @@ namespace ChuckSWAPI.Services.Implementations
     {
         //private const string baseUrl;
         private const string baseUrl = "https://api.chucknorris.io/jokes/";
+        private readonly IMapper _mapper;
         //private const string randomJokeAddress = "https://api.chucknorris.io/jokes/random";
 
 
@@ -49,8 +52,9 @@ namespace ChuckSWAPI.Services.Implementations
             return randomJoke;
         }
 
-        public async Task<JokeSearchResult> SearchJoke(string searchTerm)
+        public async Task<JokeSearchResultDto> SearchJoke(string searchTerm)
         {
+            
             var searchUrl = baseUrl + "search?query=" + searchTerm;
 
             HttpResponseMessage response = await _httpClient.GetAsync(searchUrl);
@@ -59,8 +63,14 @@ namespace ChuckSWAPI.Services.Implementations
 
             JokeSearchResult searchResults = JsonConvert.DeserializeObject<JokeSearchResult>(content);
 
+            JokeSearchResultDto jokeSearchResultDto = new()
+            {
+                Total = searchResults.Total,
+                Results = searchResults.Result.Select(s => new SearchResult() { Categories = s.Categories, Url = s.Url, Value = s.Value }).ToArray()
 
-            return searchResults;
+            };
+
+            return jokeSearchResultDto;
         }
     }
 }

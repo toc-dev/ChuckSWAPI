@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChuckSWAPI\ChuckSWAPI.csproj" />
+    <ProjectReference Include="..\Shared\ChuckSWShared.csproj" />
     <ProjectReference Include="..\StaticDetails\ChuckSWUtility.csproj" />
   </ItemGroup>
 

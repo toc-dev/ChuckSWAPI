@@ -1,5 +1,6 @@
 ﻿using ChuckSWAPI.Models;
 using ChuckSWAPI.Models.ChuckNorris;
+using ChuckSWShared.Dtos.ChuckNorrisDtos;
 
 namespace ChuckSWAPI.Services.Interfaces
 {
@@ -7,6 +8,6 @@ namespace ChuckSWAPI.Services.Interfaces
     {
         Task<JokeCategories> GetJokeCategories();
         Task<RandomJoke> GetRandomJoke();
-        Task<JokeSearchResult> SearchJoke(string searchTerm);
+        Task<JokeSearchResultDto> SearchJoke(string searchTerm);
     }
 }

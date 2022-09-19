@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace ChuckSWShared.Dtos.StarWarsDto
 {
-    public class People
+    public class PeopleDto
     {
         public int Count { get; set; }
-        public Result[] Results { get; set; }
-        public class Result
-        {
-            public string Name { get; set; }
-        }
+        public PeopleResult[] Results { get; set; }   
     }
+    public class PeopleResult
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+    }
+}
