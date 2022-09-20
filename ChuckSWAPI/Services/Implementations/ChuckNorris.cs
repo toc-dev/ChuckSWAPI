@@ -41,12 +41,15 @@ namespace ChuckSWAPI.Services.Implementations
 
         public async Task<RandomJoke> GetRandomJoke()
         {
-            var randomJokeUrl = baseUrl + "random";
+            //string a = "https://api.chucknorris.io/jokes/random?category=%lifestyle%7D";
+            var randomJokeUrl = baseUrl + "random"; //+ $"?category=%{category}%7D";
             HttpResponseMessage response = await _httpClient.GetAsync(randomJokeUrl);
-            response.EnsureSuccessStatusCode();
+
             string content = await response.Content.ReadAsStringAsync();
+            
 
             var contents = JsonConvert.DeserializeObject(content).ToString();
+
 
             RandomJoke randomJoke = JsonConvert.DeserializeObject<RandomJoke>(contents);
 

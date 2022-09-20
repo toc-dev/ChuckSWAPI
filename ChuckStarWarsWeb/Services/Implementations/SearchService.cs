@@ -33,6 +33,11 @@ namespace ChuckSWWeb.Services.Implementations
                 searchResult.Total = peopleSearch.Count;
                 searchResult.Results = peopleSearch.Results.Select(s => new SearchResults() { Url = s.Url, Value = s.Name, SearchType = "Star Wars People" }).ToArray();
             }
+            if(peopleSearch.Count == 0 && jokeSearch.Total == 0)
+            {
+                searchResult.Total = 0;
+                searchResult.Results = peopleSearch.Results.Select(s => new SearchResults() { Url = "", Value = "This does not exist", SearchType = "Neither in Star Wars nor in Chuck Norris" }).ToArray();
+            }
             return searchResult;
 
         }

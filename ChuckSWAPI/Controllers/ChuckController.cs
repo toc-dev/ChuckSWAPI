@@ -19,7 +19,7 @@ namespace ChuckSWAPI.Controllers
             var allJokes = await _chuckNorris.GetJokeCategories();
             return Ok(allJokes);
         }
-        [HttpGet("randomJoke")]
+        [HttpGet("randomJoke/")]
         public async Task<ActionResult<RandomJoke>> GetRandomJoke()
         {
             var randomJoke = await _chuckNorris.GetRandomJoke();

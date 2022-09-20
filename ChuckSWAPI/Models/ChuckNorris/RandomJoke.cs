@@ -3,8 +3,8 @@
 
     public class RandomJoke
     {
-        public object[] categories { get; set; }
-        public string created_at { get; set; }
+        public object[] Categories { get; set; }
+        public string Created_At { get; set; }
         public string Icon_Url { get; set; }
         public string Id { get; set; }
         public string Updated_At { get; set; }
@@ -13,3 +13,5 @@
     }
 
 }
+
+

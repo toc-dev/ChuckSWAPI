@@ -36,7 +36,7 @@ namespace ChuckSWWeb.Services.Implementations
         public async Task<RandomJoke> GetRandomJoke()
         {
             RandomJoke joke = new();
-            var url = _chuckUrl + "/chuck/randomJoke";
+            var url = _chuckUrl + $"/chuck/randomJoke";
             var response = _httpClient.GetAsync(url);
 
             var result = response.Result;

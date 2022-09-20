@@ -13,11 +13,11 @@
             <h1 class="text-primary">Jokes Categories</h1>
         </div>
         <div class="col text-end pt-1">
-            <a asp-controller="Villa" asp-action="CreateVilla" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New Villa</a>
+            <a asp-controller="ChuckSW" asp-action="GetCategories" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Joke Categories</a>
         </div>
     </div>
 
-    <table class="table">
+    <table class="table" id="categoryName">
 		<thead>
 			<tr>
 				<th>
@@ -26,15 +26,15 @@
 
 			</tr>
 		</thead>
-		<tbody>
+		<tbody >
 			@foreach(var item in Model.Category){
 				<tr>
-					<td td>@item</td>
+					<td td value="@item">@item</td>
 
 					<td>
 
 
-                                <button  asp-for="" type="button" class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
+                                <button  asp-for="" type="button" id=@item class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
                                     <img src=""> Get Random Joke
                                 </button>
 
@@ -105,9 +105,12 @@
 
 	function getRandomJoke(){
         debugger;
+        //let category = $("#categoryName").val();
+        //console.log(category)
         $.ajax({
                 url: "/chucksw/DisplayRandomJoke",
                 type: "GET",
+                //data: {category:category},
                 success: function(response){
                     $('#stDesc').val(response.value)
                     console.log(response.value)
