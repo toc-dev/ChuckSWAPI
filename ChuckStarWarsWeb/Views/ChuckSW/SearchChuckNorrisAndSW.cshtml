@@ -21,8 +21,11 @@
 		<tbody>
 			<@foreach (var searchResult in Model.Results) { 
 				<tr>
-				<td> @searchResult.Value </td>
-				<td> @searchResult.SearchType </td>
+					<div class="modal fade" id="jokeCategory" aria-labelledby="getRandomJokesModalLabel" aria-hidden="true">
+						<td> @searchResult.Value </td>
+						<td> @searchResult.SearchType </td>
+					</div>
+				
 				</tr>
 				}
 		</tbody>

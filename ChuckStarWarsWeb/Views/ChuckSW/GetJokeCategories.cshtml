@@ -29,56 +29,64 @@
 		<tbody >
 			@foreach(var item in Model.Category){
 				<tr>
-					<td td value="@item">@item</td>
+					
+                    
+                    <td>
+                        @item
+                        
+                    </td>
+                   
+                        
+                    
 
-					<td>
+					        <td>
 
 
-                                <button  asp-for="" type="button" id=@item class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
-                                    <img src=""> Get Random Joke
-                                </button>
+                                    <button  asp-for="" type="button" id=@item class="btn savings-type-creation" onclick="getRandomJoke()" data-bs-toggle="modal" data-bs-target="#getRandomJokesModal">
+                                        <img src=""> Get Random Joke
+                                    </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="getRandomJokesModal" tabindex="-1" aria-labelledby="getRandomJokesModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="modal-title" id="getRandomJokesModalLabel">Random Joke</div>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="savings-type-setup-body">
-                                                    <div class="savings-type-setup-top">
-                                                        <form method="post" class="saving-type-validation" novalidate>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="getRandomJokesModal" tabindex="-1" aria-labelledby="getRandomJokesModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="modal-title" id="getRandomJokesModalLabel">Random Joke</div>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="savings-type-setup-body">
+                                                        <div class="savings-type-setup-top">
+                                                            <form method="post" class="saving-type-validation" novalidate>
                                                             
-                                                            <div class="mb-3">
-                                                                <div class="row g-2">
-                                                                    <div class="col-sm-12">
-                                                                        <label for="exampleFormControlTextarea1" class="form-label">Joke</label>
-                                                                        <textarea class="form-control textarea" id="stDesc" rows="5" readonly></textarea>
+                                                                <div class="mb-3">
+                                                                    <div class="row g-2">
+                                                                        <div class="col-sm-12">
+                                                                            <label for="exampleFormControlTextarea1" class="form-label">Joke</label>
+                                                                            <textarea class="form-control textarea" id="stDesc" rows="5" readonly></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                             
                                                                 
                                                             
-                                                        </form>
-                                                    </div>
+                                                            </form>
+                                                        </div>
                                                     
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn close-random-joke" data-bs-dismiss="modal">Close</button>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn close-random-joke" data-bs-dismiss="modal">Close</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
 
-						@*<a asp-controller="ChuckSW" asp-action="GetJokeCategories" asp-route-jokeId="@item" class="btn btn-success" ><i class="bi bi-pencil-square"></i></a>*@
-					</td>
-				</tr>
+						
+					        </td>
+			    </tr>
 			}
 		</tbody>
     </table>

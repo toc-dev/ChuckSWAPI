@@ -9,18 +9,49 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="SearchChuckNorrisAndStarWars">Search</a>
-</p>
 <form asp-controller="ChuckSW" asp-action="SearchChuckNorrisAndSW" method="post">
     <p>
 
-        Title: <input type="text" name="searchTerm" />
-        <input type="submit" onclick="getSearchResults" value="search" />
+        Title: <input type="text" class="text-search" name="searchTerm" />
+        <input type="submit" onclick="getSearchResults" class="button-search" value="search" />
     </p>
 </form>
 
-<table>
+<title>Search panel in C# - MdmSoft</title>
+    <style type="text/css">
+        .text-search {
+            height: 24px;
+            font-family: "Helvetica Neue",helvetica,sans-serif;
+            font-weight: normal;
+            color: rgb(0, 143, 213);
+            font-size: 16px;
+            padding: 0px 10px;
+            border-radius: 4px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0px 1px 2px rgb(81, 184, 228) inset;
+            border: 1px solid rgb(22, 71, 88);
+        }
+
+        .button-search {
+            cursor: pointer;
+            height: 24px;
+            font-family: "Helvetica Neue",helvetica,sans-serif;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+            padding: 0px 24px;
+            border-radius: 4px;
+            background-color: rgb(0, 143, 213);
+            box-shadow: 0px 1px 2px rgb(81, 184, 228) inset;
+            text-shadow: 0px 1px 1px rgb(1, 72, 117);
+            border: 1px solid rgb(22, 71, 88);
+        }
+
+            .button-search:hover {
+                color: yellow;
+            }
+    </style>
+
 
 @section Scripts{
 
